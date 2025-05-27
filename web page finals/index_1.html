@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IronFit Apparel</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Custom CSS for the auth modal */
+    .auth-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .auth-modal.active {
+      display: flex;
+    }
+    
+    .auth-container {
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .auth-tab {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-tab.active {
+      border-bottom: 3px solid #ef4444;
+      color: #ef4444;
+    }
+    
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group i {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: #6b7280;
+    }
+    
+    .form-input {
+      padding-left: 3rem;
+      width: 100%;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+    }
+    
+    .form-input:focus {
+      border-color: #ef4444;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #6b7280;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #6b7280;
+      margin: 1.5rem 0;
+    }
+    
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #374151;
+    }
+    
+    .divider::before {
+      margin-right: 1rem;
+    }
+    
+    .divider::after {
+      margin-left: 1rem;
+    }
+    
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .social-btn i {
+      margin-right: 0.5rem;
+    }
+    
+    .google-btn {
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+    }
+    
+    .google-btn:hover {
+      background-color: #111827;
+    }
+    
+    .facebook-btn {
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+    }
+    
+    .facebook-btn:hover {
+      background-color: #111827;
+    }
+    
+    .error-message {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    .success-message {
+      color: #10b981;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    /* New create account icon styles */
+    .create-account-icon {
+      position: relative;
+    }
+    
+    .create-account-icon:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .tooltip {
+      visibility: hidden;
+      width: 120px;
+      background-color: #111827;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 12px;
+    }
+    
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #111827 transparent transparent transparent;
+    }
+
+    /* FAQ Styles */
+    .faq-container {
+      max-width: 4xl;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background-color: #1f2937;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      background-color: #111827;
+    }
+    
+    .faq-question h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-bottom: 1.5rem;
+    }
+    
+    .faq-answer p {
+      margin: 0;
+      color: #d1d5db;
+    }
+    
+    .faq-answer ul {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .faq-answer li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .faq-category {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: #ef4444;
+      border-bottom: 2px solid #374151;
+      padding-bottom: 0.5rem;
+    }
+    
+    .faq-search {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .faq-search input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 0.5rem;
+      color: white;
+    }
+    
+    .faq-search i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <!-- Header -->
+  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold tracking-wide text-red-500">IronFit Apparel</h1>
+    <nav class="space-x-6 flex items-center">
+      <a href="index_1.html" class="hover:text-red-400 transition">Home</a>
+      <a href="shop.html" class="hover:text-red-400 transition">Shop</a>
+      <a href="about us.html" class="hover:text-red-400 transition">About us</a>
+      <a href="services.html" class="hover:text-red-400 transition">services</a>
+      <a href="contact.html" class="hover:text-red-400 transition">Contact</a>
+      <a href="FAQ.html" class="hover:text-red-400 transition">FAQ</a>
+      
+      <!-- Create Account Icon -->
+      <div class="create-account-icon">
+        <a href="#" id="createAccountBtn" class="hover:text-red-400 transition" title="Create Account">
+          <i class="fas fa-user-plus text-2xl"></i>
+          <span class="tooltip">Create Account</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative h-screen flex flex-col justify-center items-center text-center bg-cover bg-center" style="background-image: url('https://www.thestreet.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_700/MjE0NzU1ODUwMzkxMTM1MjU1/gymshark-lead_ck_20250608.webp');">
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="relative z-10 max-w-2xl px-4">
+      <h2 class="text-4xl md:text-6xl font-extrabold mb-6 text-white leading-tight">Built for Strength, Worn with Pride</h2>
+      <p class="text-lg md:text-xl mb-6 text-gray-300">Performance apparel designed for lifters, by lifters.</p>
+      <a href="shop.html" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 px-6 bg-gray-900">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 text-center">
+      <div>
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Premium Quality</h3>
+        <p class="text-gray-400">Made from sweat-wicking, durable fabrics to power you through your toughest workouts.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Athlete-Tested</h3>
+        <p class="text-gray-400">Tested by real lifters and athletes to ensure maximum performance and comfort.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Style & Strength</h3>
+        <p class="text-gray-400">Apparel that blends gym functionality with street-ready style.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Preview -->
+  <section class="py-20 px-6 bg-gray-800">
+    <div class="max-w-6xl mx-auto text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Featured Gear</h2>
+      <p class="text-gray-400">Top picks from the IronFit lineup</p>
+    </div>
+    <div class="grid gap-10 md:grid-cols-3 max-w-6xl mx-auto">
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg">
+        <img src="https://www.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl6q2in9o7k3%2Fk67jgvvN9fbgJkH9LfJLT%2F8747419ebd788a8886890c3b6b5cee27%2FSoftSculpt-Ecom-PDP_Product_Image_-_22772349__1_.png&w=1920&q=85" alt="T-shirt" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-white">IronFit </h3>
+          <p class="text-gray-300 mt-2">69</p>
+          <button class="buy-now-btn mt-4 w-full bg-red-500 hover:bg-red-600 py-2 rounded text-white" data-product="IronFit Performance Tee" data-price="29.99">Buy Now</button>
+        </div>
+      </div>
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg">
+        <img src="https://www.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl6q2in9o7k3%2F3o38xYbGbtFfKmZbJOcasf%2Fb775e6364ce7ea1bba9eada1465c96fc%2FSoftSculpt-Ecom-5x4_PLP_Advert_-_22772397__1_.png&w=1920&q=85" alt="Hoodie" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-white">IronFit T</h3>
+          <p class="text-gray-300 mt-2">69</p>
+          <button class="buy-now-btn mt-4 w-full bg-red-500 hover:bg-red-600 py-2 rounded text-white" data-product="IronFit Training Hoodie" data-price="49.99">Buy Now</button>
+        </div>
+      </div>
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-lg">
+        <img src="https://www.gymshark.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl6q2in9o7k3%2F6CCUpc6niwAJ4m5pWHdYTS%2Fee912d352c298a755871d14bf40b4cdb%2FSoftSculpt-Ecom-PDP_Product_Image_-_22772469__1_.png&w=1920&q=85" alt="Shorts" class="w-full h-60 object-cover">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-white">IronFit </h3>
+          <p class="text-gray-300 mt-2">69</p>
+          <button class="buy-now-btn mt-4 w-full bg-red-500 hover:bg-red-600 py-2 rounded text-white" data-product="IronFit Gym Shorts" data-price="34.99">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8 text-left">
+        <div>
+          <h4 class="text-white font-semibold mb-4">Shop</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-red-400">New Arrivals</a></li>
+            <li><a href="#" class="hover:text-red-400">Men's Apparel</a></li>
+            <li><a href="#" class="hover:text-red-400">Women's Apparel</a></li>
+            <li><a href="#" class="hover:text-red-400">Accessories</a></li>
+            <li><a href="#" class="hover:text-red-400">Collections</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="#faq" class="hover:text-red-400">FAQs</a></li>
+            <li><a href="#" class="hover:text-red-400">Shipping Info</a></li>
+            <li><a href="#" class="hover:text-red-400">Returns & Exchanges</a></li>
+            <li><a href="#" class="hover:text-red-400">Size Guide</a></li>
+            <li><a href="contact.html" class="hover:text-red-400">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="about us.html" class="hover:text-red-400">About Us</a></li>
+            <li><a href="#" class="hover:text-red-400">Our Story</a></li>
+            <li><a href="#" class="hover:text-red-400">Athletes</a></li>
+            <li><a href="#" class="hover:text-red-400">Careers</a></li>
+            <li><a href="#" class="hover:text-red-400">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Connect</h4>
+          <div class="flex space-x-4 mb-4">
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-facebook text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-twitter text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-youtube text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-tiktok text-xl"></i></a>
+          </div>
+          <p class="text-sm">Subscribe to our newsletter for exclusive offers and updates</p>
+          <div class="mt-3 flex">
+            <input type="email" placeholder="Your email" class="bg-gray-700 text-white px-4 py-2 rounded-l focus:outline-none w-full">
+            <button class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-r"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6">
+        <p>&copy; 2025 IronFit Apparel. All rights reserved.</p>
+        <div class="mt-2 space-x-4">
+          <a href="#" class="hover:text-red-400">Privacy Policy</a>
+          <a href="#" class="hover:text-red-400">Terms of Service</a>
+          <a href="#" class="hover:text-red-400">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-container bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden">
+      <!-- Modal Header with Tabs -->
+      <div class="flex border-b border-gray-700">
+        <div class="auth-tab active w-1/2 py-4 text-center font-semibold" data-tab="login">Sign In</div>
+        <div class="auth-tab w-1/2 py-4 text-center font-semibold" data-tab="register">Create Account</div>
+      </div>
+      
+      <!-- Login Form -->
+      <div class="auth-content p-8" id="loginContent">
+        <h3 class="text-2xl font-bold mb-6 text-center">Welcome Back</h3>
+        
+        <form id="loginForm">
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="loginEmail" class="form-input py-3 px-4 rounded-lg" placeholder="Email" required>
+            <div class="error-message" id="loginEmailError">Please enter a valid email</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="loginPassword" class="form-input py-3 px-4 rounded-lg" placeholder="Password" required>
+            <span class="password-toggle" id="loginTogglePassword"><i class="fas fa-eye"></i></span>
+            <div class="error-message" id="loginPasswordError">Password must be at least 6 characters</div>
+          </div>
+          
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center">
+              <input type="checkbox" id="rememberMe" class="rounded text-red-500 focus:ring-red-500">
+              <label for="rememberMe" class="ml-2 text-sm text-gray-400">Remember me</label>
+            </div>
+            <a href="#" class="text-sm text-red-400 hover:text-red-300">Forgot password?</a>
+          </div>
+          
+          <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 mb-4">
+            Sign In
+          </button>
+          
+          <div class="success-message" id="loginSuccess">Login successful! Redirecting...</div>
+          <div class="error-message" id="loginError">Invalid email or password</div>
+        </form>
+        
+        <div class="divider">or continue with</div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+        
+        <p class="text-center mt-6 text-gray-400">
+          Don't have an account? <a href="#" class="text-red-400 hover:text-red-300 switch-to-register">Sign up</a>
+        </p>
+      </div>
+      
+      <!-- Register Form -->
+      <div class="auth-content p-8 hidden" id="registerContent">
+        <h3 class="text-2xl font-bold mb-6 text-center">Create Account</h3>
+        
+        <form id="registerForm">
+          <div class="form-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="registerName" class="form-input py-3 px-4 rounded-lg" placeholder="Full Name" required>
+            <div class="error-message" id="registerNameError">Please enter your name</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="registerEmail" class="form-input py-3 px-4 rounded-lg" placeholder="Email" required>
+            <div class="error-message" id="registerEmailError">Please enter a valid email</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="registerPassword" class="form-input py-3 px-4 rounded-lg" placeholder="Password" required>
+            <span class="password-toggle" id="registerTogglePassword"><i class="fas fa-eye"></i></span>
+            <div class="error-message" id="registerPasswordError">Password must be at least 6 characters</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="registerConfirmPassword" class="form-input py-3 px-4 rounded-lg" placeholder="Confirm Password" required>
+            <div class="error-message" id="registerConfirmPasswordError">Passwords don't match</div>
+          </div>
+          
+          <div class="flex items-center mb-6">
+            <input type="checkbox" id="acceptTerms" class="rounded text-red-500 focus:ring-red-500" required>
+            <label for="acceptTerms" class="ml-2 text-sm text-gray-400">
+              I agree to the <a href="#" class="text-red-400 hover:text-red-300">Terms of Service</a> and <a href="#" class="text-red-400 hover:text-red-300">Privacy Policy</a>
+            </label>
+          </div>
+          
+          <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 mb-4">
+            Create Account
+          </button>
+          
+          <div class="success-message" id="registerSuccess">Account created successfully! Redirecting...</div>
+          <div class="error-message" id="registerError">Error creating account. Please try again.</div>
+        </form>
+        
+        <div class="divider">or sign up with</div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+        
+        <p class="text-center mt-6 text-gray-400">
+          Already have an account? <a href="#" class="text-red-400 hover:text-red-300 switch-to-login">Sign in</a>
+        </p>
+      </div>
+      
+      <!-- Close Button -->
+      <button class="absolute top-4 right-4 text-gray-400 hover:text-white" id="closeAuthModal">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Product Modal (shown after successful login) -->
+  <div class="auth-modal hidden" id="productModal">
+    <div class="bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 p-8">
+      <h3 class="text-2xl font-bold mb-6 text-center" id="productModalTitle">Complete Your Purchase</h3>
+      <p class="text-gray-400 mb-6">You're about to purchase: <span class="font-semibold text-white" id="productName"></span></p>
+      <p class="text-xl mb-6">Price: <span class="font-bold text-red-500" id="productPrice"></span></p>
+      
+      <div class="mb-6">
+        <label for="shippingAddress" class="block text-gray-400 mb-2">Shipping Address</label>
+        <input type="text" id="shippingAddress" class="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white" placeholder="Enter your shipping address">
+      </div>
+      
+      <div class="mb-6">
+        <label for="paymentMethod" class="block text-gray-400 mb-2">Payment Method</label>
+        <select id="paymentMethod" class="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-4 text-white">
+          <option value="credit">Credit Card</option>
+          <option value="paypal">PayPal</option>
+          <option value="crypto">Cryptocurrency</option>
+        </select>
+      </div>
+      
+      <button id="confirmPurchase" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 mb-4">
+        Complete Purchase
+      </button>
+      
+      <button id="cancelPurchase" class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const authModal = document.getElementById('authModal');
+    const productModal = document.getElementById('productModal');
+    const loginContent = document.getElementById('loginContent');
+    const registerContent = document.getElementById('registerContent');
+    const loginTab = document.querySelector('[data-tab="login"]');
+    const registerTab = document.querySelector('[data-tab="register"]');
+    const switchToRegisterLinks = document.querySelectorAll('.switch-to-register');
+    const switchToLoginLinks = document.querySelectorAll('.switch-to-login');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const buyNowButtons = document.querySelectorAll('.buy-now-btn');
+    const profileIcon = document.getElementById('profile-icon');
+    const createAccountBtn = document.getElementById('createAccountBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const loginTogglePassword = document.getElementById('loginTogglePassword');
+    const registerTogglePassword = document.getElementById('registerTogglePassword');
+    const loginPassword = document.getElementById('loginPassword');
+    const registerPassword = document.getElementById('registerPassword');
+    const confirmPurchase = document.getElementById('confirmPurchase');
+    const cancelPurchase = document.getElementById('cancelPurchase');
+    const faqCreateAccount = document.getElementById('faqCreateAccount');
+    
+    // FAQ Elements
+    const faqItems = document.querySelectorAll('.faq-item');
+    const faqSearch = document.getElementById('faqSearch');
+    const noResults = document.getElementById('noResults');
+
+    // Current product to purchase
+    let currentProduct = null;
+
+    // Toggle password visibility
+    loginTogglePassword.addEventListener('click', function() {
+      togglePasswordVisibility(loginPassword, loginTogglePassword);
+    });
+    
+    registerTogglePassword.addEventListener('click', function() {
+      togglePasswordVisibility(registerPassword, registerTogglePassword);
+    });
+    
+    function togglePasswordVisibility(passwordField, toggleIcon) {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      toggleIcon.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    }
+    
+    // Switch between login and register tabs
+    loginTab.addEventListener('click', function() {
+      switchTab('login');
+    });
+    
+    registerTab.addEventListener('click', function() {
+      switchTab('register');
+    });
+    
+    switchToRegisterLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchTab('register');
+      });
+    });
+    
+    switchToLoginLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchTab('login');
+      });
+    });
+    
+    function switchTab(tab) {
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginContent.classList.remove('hidden');
+        registerContent.classList.add('hidden');
+      } else {
+        loginTab.classList.remove('active');
+        registerTab.classList.add('active');
+        loginContent.classList.add('hidden');
+        registerContent.classList.remove('hidden');
+      }
+    }
+    
+    // Close modal
+    closeAuthModal.addEventListener('click', function() {
+      authModal.classList.remove('active');
+    });
+    
+    // Click outside modal to close
+    authModal.addEventListener('click', function(e) {
+      if (e.target === authModal) {
+        authModal.classList.remove('active');
+      }
+    });
+    
+    productModal.addEventListener('click', function(e) {
+      if (e.target === productModal) {
+        productModal.classList.add('hidden');
+      }
+    });
+    
+    // Create Account button click
+    createAccountBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      authModal.classList.add('active');
+      switchTab('register');
+    });
+    
+    // FAQ Create Account link
+    faqCreateAccount.addEventListener('click', function(e) {
+      e.preventDefault();
+      authModal.classList.add('active');
+      switchTab('register');
+    });
+    
+    // Buy Now button click
+    buyNowButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        currentProduct = {
+          name: this.getAttribute('data-product'),
+          price: this.getAttribute('data-price')
+        };
+        
+        // Check if user is logged in (in a real app, you'd check session/cookie)
+        const isLoggedIn = localStorage.getItem('ironfitLoggedIn') === 'true';
+        
+        if (isLoggedIn) {
+          showProductModal();
+        } else {
+          authModal.classList.add('active');
+          switchTab('login');
+        }
+      });
+    });
+    
+    // Profile icon click
+    profileIcon.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Check if user is logged in
+      const isLoggedIn = localStorage.getItem('ironfitLoggedIn') === 'true';
+      
+      if (isLoggedIn) {
+        // In a real app, this would show user account details
+        alert('Welcome back! Account management coming soon.');
+      } else {
+        authModal.classList.add('active');
+        switchTab('login');
+      }
+    });
+    
+    // Login form submission
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation
+      let isValid = true;
+      
+      if (!validateEmail(email)) {
+        document.getElementById('loginEmailError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('loginEmailError').style.display = 'none';
+      }
+      
+      if (password.length < 6) {
+        document.getElementById('loginPasswordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('loginPasswordError').style.display = 'none';
+      }
+      
+      if (isValid) {
+        // In a real app, you'd make an API call here to authenticate
+        // For demo purposes, we'll just simulate a successful login
+        
+        // Hide any previous error
+        document.getElementById('loginError').style.display = 'none';
+        
+        // Show success message
+        document.getElementById('loginSuccess').style.display = 'block';
+        
+        // Store login state
+        localStorage.setItem('ironfitLoggedIn', 'true');
+        localStorage.setItem('ironfitUserEmail', email);
+        
+        // Close modal after delay
+        setTimeout(() => {
+          authModal.classList.remove('active');
+          document.getElementById('loginSuccess').style.display = 'none';
+          
+          // If there was a product to purchase, show the product modal
+          if (currentProduct) {
+            showProductModal();
+          }
+        }, 1500);
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    });
+    
+    // Register form submission
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+      const acceptTerms = document.getElementById('acceptTerms').checked;
+      
+      // Validation
+      let isValid = true;
+      
+      if (name.trim() === '') {
+        document.getElementById('registerNameError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerNameError').style.display = 'none';
+      }
+      
+      if (!validateEmail(email)) {
+        document.getElementById('registerEmailError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerEmailError').style.display = 'none';
+      }
+      
+      if (password.length < 6) {
+        document.getElementById('registerPasswordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerPasswordError').style.display = 'none';
+      }
+      
+      if (password !== confirmPassword) {
+        document.getElementById('registerConfirmPasswordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerConfirmPasswordError').style.display = 'none';
+      }
+      
+      if (!acceptTerms) {
+        alert('Please accept the terms and conditions');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // In a real app, you'd make an API call here to register the user
+        // For demo purposes, we'll just simulate a successful registration
+        
+        // Hide any previous error
+        document.getElementById('registerError').style.display = 'none';
+        
+        // Show success message
+        document.getElementById('registerSuccess').style.display = 'block';
+        
+        // Store login state
+        localStorage.setItem('ironfitLoggedIn', 'true');
+        localStorage.setItem('ironfitUserEmail', email);
+        localStorage.setItem('ironfitUserName', name);
+        
+        // Close modal after delay
+        setTimeout(() => {
+          authModal.classList.remove('active');
+          document.getElementById('registerSuccess').style.display = 'none';
+          
+          // If there was a product to purchase, show the product modal
+          if (currentProduct) {
+            showProductModal();
+          }
+        }, 1500);
+      } else {
+        document.getElementById('registerError').style.display = 'block';
+      }
+    });
+    
+    // Show product modal after login
+    function showProductModal() {
+      document.getElementById('productName').textContent = currentProduct.name;
+      document.getElementById('productPrice').textContent = `$${currentProduct.price}`;
+      document.getElementById('productModalTitle').textContent = `Purchase ${currentProduct.name}`;
+      productModal.classList.remove('hidden');
+    }
+    
+    // Confirm purchase
+    confirmPurchase.addEventListener('click', function() {
+      // In a real app, you'd process the payment here
+      alert(`Thank you for purchasing ${currentProduct.name}! Your order has been placed.`);
+      productModal.classList.add('hidden');
+      currentProduct = null;
+    });
+    
+    // Cancel purchase
+    cancelPurchase.addEventListener('click', function() {
+      productModal.classList.add('hidden');
+      currentProduct = null;
+    });
+    
+    // Helper function to validate email
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+    
+    // Check if user is already logged in when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('ironfitLoggedIn') === 'true';
+      if (isLoggedIn) {
+        // Update profile icon to show logged in state
+        profileIcon.innerHTML = '<i class="fas fa-user-check text-2xl text-green-500"></i>';
+      }
+      
+      // Initialize FAQ functionality
+      initFAQ();
+    });
+    
+    // FAQ Functionality
+    function initFAQ() {
+      // Toggle FAQ items
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
+      });
+      
+      // FAQ Search
+      faqSearch.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        let hasResults = false;
+        
+        faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+          const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+          
+          if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = '';
+            hasResults = true;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        // Show/hide no results message
+        noResults.style.display = hasResults || searchTerm === '' ? 'none' : 'block';
+      });
+    }
+  </script>
+</body>
+</html>

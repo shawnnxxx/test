@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Profile | IronFit Apparel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .profile-card {
+      background: linear-gradient(135deg, #1a202c, #2d3748);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .profile-pic {
+      border: 4px solid #4a5568;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .skill-bar {
+      height: 6px;
+      background-color: #2d3748;
+      border-radius: 3px;
+    }
+    
+    .skill-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #ef4444, #dc2626);
+    }
+    
+    .social-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-3px);
+    }
+    
+    .project-card {
+      background: #2d3748;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .badge {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    
+    .header-bg {
+      background-color: #1f2937;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 min-h-screen text-white font-sans">
+  <!-- Header - Matches your IronFit navigation -->
+  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold tracking-wide text-red-500">IronFit Apparel</h1>
+    <nav class="space-x-6 flex items-center">
+      <a href="index_1.html" class="hover:text-red-400 transition">Home</a>
+      <a href="shop.html" class="hover:text-red-400 transition">Shop</a>
+      <a href="about us.html" class="hover:text-red-400 transition">About us</a>
+      <a href="contact.html" class="hover:text-red-400 transition">Contact</a>
+      <!-- Active Profile Icon -->
+      <a href="creator.html" class="text-red-400 transition" title="Creator Profile">
+        <i class="fas fa-user-circle text-2xl"></i>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Profile Content -->
+  <div class="container mx-auto px-4 py-12 max-w-4xl">
+    <div class="profile-card rounded-xl overflow-hidden">
+      <!-- Header Section -->
+      <div class="relative">
+        <div class="h-32 bg-gradient-to-r from-red-600 to-red-800"></div>
+        <div class="absolute -bottom-16 left-6">
+          <div class="profile-pic w-32 h-32 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
+            <img src="https://scontent.fcrk1-1.fna.fbcdn.net/v/t1.15752-9/494830902_1213461423436148_19938376708127605_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHmoasKIrnxYMsdEyZCNjpe_1_x25SfNFf_X_HblJ80V5ow1pa2sUM-6f0mg9LHUsALXf30HWDzjNxih7pno5Ke&_nc_ohc=ZsIhPz94e3QQ7kNvwH-4E2e&_nc_oc=AdkJovQx0XlNzMVmRoXGiX2aKZAKNQ67OCD4CznJSZRICCr3rj-dgUhVAi2xFmxARu8&_nc_zt=23&_nc_ht=scontent.fcrk1-1.fna&oh=03_Q7cD2QHMdiVeKKCRi860s_um0XS4s6aRnWN1ZUcPBoKTM22iNA&oe=685814F0" alt="Profile Picture" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="p-6 pt-20">
+        <!-- Name and Title -->
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h1 class="text-2xl font-bold text-white">shawnrick ello</h1>
+            <div class="flex items-center mt-1">
+              <span class="text-red-400 mr-2"><i class="fas fa-map-marker-alt"></i></span>
+              <span>united states of pampanga, Dau</span>
+            </div>
+          </div>
+          <div class="flex space-x-2">
+            <span class="badge text-xs px-2 py-1 rounded-full text-white">Student</span>
+            <span class="badge text-xs px-2 py-1 rounded-full text-white">Entrepreneur</span>
+          </div>
+        </div>
+        
+        <!-- Bio Section -->
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-white mb-3 flex items-center">
+            <i class="fas fa-user-tie mr-2 text-red-400"></i> About Me
+          </h2>
+          <p class="text-gray-300">
+            Bachelor of science in office administration student and fitness enthusiast who created IronFit Apparel to combine my passion for 
+            technology and strength training. Currently building my web development business while pursuing my degree 
+            and competing in pageant. I believe in creating products that help athletes perform at their best.
+          </p>
+        </div>
+        
+        <!-- Education Section -->
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-white mb-3 flex items-center">
+            <i class="fas fa-graduation-cap mr-2 text-red-400"></i> Education
+          </h2>
+          <div class="pl-2 border-l-2 border-red-500">
+            <div class="mb-3">
+              <h3 class="font-medium">Bachelor of Science in Office administration</h3>
+              <p class="text-sm text-gray-400">Clack collage of science and technology</p>
+            </div>
+            <div>
+              <h3 class="font-medium">Certified Personal Trainer</h3>
+              <p class="text-sm text-gray-400">Model (2022)</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Skills Section -->
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-white mb-3 flex items-center">
+            <i class="fas fa-code mr-2 text-red-400"></i> Skills
+          </h2>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Web Development</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Fitness Training</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>Business Development</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Projects/Business Section -->
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-white mb-3 flex items-center">
+            <i class="fas fa-briefcase mr-2 text-red-400"></i> My Ventures
+          </h2>
+          <div class="project-card rounded-lg p-4 mb-3">
+            <h3 class="font-medium text-white">IronFit Apparel</h3>
+            <p class="text-sm text-gray-300 mt-1">Performance athletic wear designed for serious lifters and athletes.</p>
+            <div class="flex mt-3">
+              <a href="index_1.html" class="text-xs bg-red-600 hover:bg-red-700 px-3 py-1 rounded mr-2 text-white">Visit Site</a>
+              <a href="shop.html" class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-white">View Products</a>
+            </div>
+          </div>
+          <div class="project-card rounded-lg p-4">
+            <h3 class="font-medium text-white">LiftLogic Software</h3>
+            <p class="text-sm text-gray-300 mt-1">Fitness tracking and programming platform for strength athletes.</p>
+            <div class="flex mt-3">
+              <a href="#" class="text-xs bg-red-600 hover:bg-red-700 px-3 py-1 rounded mr-2 text-white">Coming Soon</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Contact/Social Section -->
+        <div>
+          <h2 class="text-lg font-semibold text-white mb-3 flex items-center">
+            <i class="fas fa-envelope mr-2 text-red-400"></i> Get In Touch
+          </h2>
+          <div class="flex space-x-4">
+            <a href="#" class="social-icon w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-red-400 hover:bg-red-600 hover:text-white">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-icon w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-red-400 hover:bg-red-600 hover:text-white">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="social-icon w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-red-400 hover:bg-red-600 hover:text-white">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="contact.html" class="social-icon w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-red-400 hover:bg-red-600 hover:text-white">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer - Matches your IronFit footer -->
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm">
+    &copy; 2025 IronFit Apparel. All rights reserved.
+  </footer>
+</body>
+</html>

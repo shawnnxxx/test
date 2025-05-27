@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IronFit Apparel - FAQ</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom CSS for the auth modal */
+    .auth-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .auth-modal.active {
+      display: flex;
+    }
+    
+    .auth-container {
+      animation: modalFadeIn 0.3s ease-out;
+    }
+    
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .auth-tab {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .auth-tab.active {
+      border-bottom: 3px solid #ef4444;
+      color: #ef4444;
+    }
+    
+    .form-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group i {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: #6b7280;
+    }
+    
+    .form-input {
+      padding-left: 3rem;
+      width: 100%;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+    }
+    
+    .form-input:focus {
+      border-color: #ef4444;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+    }
+    
+    .password-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #6b7280;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #6b7280;
+      margin: 1.5rem 0;
+    }
+    
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #374151;
+    }
+    
+    .divider::before {
+      margin-right: 1rem;
+    }
+    
+    .divider::after {
+      margin-left: 1rem;
+    }
+    
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .social-btn i {
+      margin-right: 0.5rem;
+    }
+    
+    .google-btn {
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+    }
+    
+    .google-btn:hover {
+      background-color: #111827;
+    }
+    
+    .facebook-btn {
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      color: white;
+    }
+    
+    .facebook-btn:hover {
+      background-color: #111827;
+    }
+    
+    .error-message {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    .success-message {
+      color: #10b981;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+    
+    /* New create account icon styles */
+    .create-account-icon {
+      position: relative;
+    }
+    
+    .create-account-icon:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .tooltip {
+      visibility: hidden;
+      width: 120px;
+      background-color: #111827;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 12px;
+    }
+    
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #111827 transparent transparent transparent;
+    }
+
+    /* FAQ Styles */
+    .faq-container {
+      max-width: 4xl;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background-color: #1f2937;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      background-color: #111827;
+    }
+    
+    .faq-question h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-bottom: 1.5rem;
+    }
+    
+    .faq-answer p {
+      margin: 0;
+      color: #d1d5db;
+    }
+    
+    .faq-answer ul {
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .faq-answer li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .faq-category {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: #ef4444;
+      border-bottom: 2px solid #374151;
+      padding-bottom: 0.5rem;
+    }
+    
+    .faq-search {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .faq-search input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 0.5rem;
+      color: white;
+    }
+    
+    .faq-search i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b7280;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+      display: none;
+    }
+    
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 1rem 0;
+      font-size: 0.875rem;
+    }
+    
+    .breadcrumb a {
+      color: #9ca3af;
+      transition: color 0.3s;
+    }
+    
+    .breadcrumb a:hover {
+      color: #ef4444;
+    }
+    
+    .breadcrumb span {
+      margin: 0 0.5rem;
+      color: #6b7280;
+    }
+    
+    /* FAQ Hero */
+    .faq-hero {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #374151;
+    }
+    
+    /* FAQ Categories */
+    .faq-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .faq-category-card {
+      background-color: #1f2937;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border-left: 4px solid #ef4444;
+    }
+    
+    .faq-category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .faq-category-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+    
+    .faq-category-card p {
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+    
+    .faq-category-card i {
+      font-size: 2rem;
+      color: #ef4444;
+      margin-bottom: 1rem;
+    }
+    
+    /* Contact CTA */
+    .contact-cta {
+      background-color: #1f2937;
+      border-radius: 0.5rem;
+      padding: 3rem;
+      text-align: center;
+      margin-top: 4rem;
+      border: 1px solid #374151;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <!-- Header -->
+  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold tracking-wide text-red-500">IronFit Apparel</h1>
+    <nav class="space-x-6 flex items-center">
+      <a href="index_1.html" class="hover:text-red-400 transition">Home</a>
+      <a href="shop.html" class="hover:text-red-400 transition">Shop</a>
+      <a href="about us.html" class="hover:text-red-400 transition">About us</a>
+      <a href="services.html" class="hover:text-red-400 transition">services</a>
+      <a href="contact.html" class="hover:text-red-400 transition">Contact</a>
+      <a href="FAQ.html" class="hover:text-red-400 transition">FAQ</a>
+      
+      <!-- Create Account Icon -->
+      <div class="create-account-icon">
+        <a href="#" id="createAccountBtn" class="hover:text-red-400 transition" title="Create Account">
+          <i class="fas fa-user-plus text-2xl"></i>
+          <span class="tooltip">Create Account</span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="breadcrumb">
+      <a href="index_1.html">Home</a>
+      <span>/</span>
+      <a href="FAQ.html">FAQ</a>
+    </div>
+  </div>
+
+  <!-- FAQ Hero -->
+  <section class="faq-hero">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+      <p class="text-xl text-gray-400 max-w-3xl mx-auto">Find answers to common questions about our products, shipping, returns, and more.</p>
+    </div>
+  </section>
+
+  <!-- FAQ Categories -->
+  <section class="max-w-6xl mx-auto px-6">
+    <h2 class="text-2xl font-bold mb-6">Browse by Category</h2>
+    <div class="faq-categories">
+      <a href="#orders-shipping" class="faq-category-card">
+        <i class="fas fa-truck"></i>
+        <h3>Orders & Shipping</h3>
+        <p>Questions about order status, delivery times, and shipping methods</p>
+      </a>
+      <a href="#returns-exchanges" class="faq-category-card">
+        <i class="fas fa-exchange-alt"></i>
+        <h3>Returns & Exchanges</h3>
+        <p>Our return policy, exchange process, and refund information</p>
+      </a>
+      <a href="#product-info" class="faq-category-card">
+        <i class="fas fa-tshirt"></i>
+        <h3>Product Information</h3>
+        <p>Sizing, care instructions, and product features</p>
+      </a>
+      <a href="#account-payments" class="faq-category-card">
+        <i class="fas fa-credit-card"></i>
+        <h3>Account & Payments</h3>
+        <p>Creating accounts, payment methods, and security</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-10 px-6 bg-gray-900">
+    <div class="max-w-4xl mx-auto">
+      <div class="faq-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="faqSearch" placeholder="Search FAQs...">
+      </div>
+
+      <div class="no-results" id="noResults">
+        <i class="fas fa-search fa-2x mb-4"></i>
+        <h3 class="text-xl mb-2">No results found</h3>
+        <p>Try different keywords or browse our categories above</p>
+      </div>
+
+      <h3 class="faq-category" id="orders-shipping">Orders & Shipping</h3>
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>How long does shipping take?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We typically process and ship orders within 1-2 business days. Shipping times vary based on your location:</p>
+          <ul>
+            <li>USA: 3-5 business days</li>
+            <li>Canada: 5-7 business days</li>
+            <li>International: 7-14 business days</li>
+          </ul>
+          <p>You'll receive a tracking number once your order ships.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>What shipping methods do you offer?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We offer several shipping options:</p>
+          <ul>
+            <li><strong>Standard Shipping:</strong> Free on orders over $50 (USA only)</li>
+            <li><strong>Express Shipping:</strong> 2-3 business days ($9.99)</li>
+            <li><strong>International Shipping:</strong> Rates calculated at checkout</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Can I track my order?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! Once your order has shipped, you'll receive an email with your tracking number. You can track your package directly through our website by logging into your account or using the tracking link in your shipping confirmation email.</p>
+        </div>
+      </div>
+
+      <h3 class="faq-category" id="returns-exchanges">Returns & Exchanges</h3>
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>What is your return policy?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We offer a 30-day return policy from the date of delivery. Items must be unworn, unwashed, and in original condition with tags attached. To initiate a return:</p>
+          <ol>
+            <li>Log into your account and go to "Order History"</li>
+            <li>Select the order and items you wish to return</li>
+            <li>Print the prepaid return label</li>
+            <li>Package your return and drop it off at any UPS location</li>
+          </ol>
+          <p>Refunds are processed within 3-5 business days after we receive your return.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Do you offer exchanges?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! We offer free size exchanges within 30 days of purchase. To request an exchange:</p>
+          <ol>
+            <li>Contact our customer service team at support@ironfit.com</li>
+            <li>Provide your order number and the new size you need</li>
+            <li>We'll ship your new item once we receive your return</li>
+          </ol>
+          <p>Note: Exchanges are subject to availability. If your desired size is out of stock, we'll issue a refund instead.</p>
+        </div>
+      </div>
+
+      <h3 class="faq-category" id="product-info">Product Information</h3>
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>How do I choose the right size?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We provide detailed size charts for each product on its product page. For the best fit:</p>
+          <ul>
+            <li>Measure your chest, waist, and hips</li>
+            <li>Compare your measurements to our size chart</li>
+            <li>Consider your preferred fit (slim, regular, or relaxed)</li>
+          </ul>
+          <p>If you're between sizes, we recommend sizing up for a looser fit or down for a more compressive fit.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>How should I care for my IronFit apparel?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>To maintain the quality and performance of your IronFit gear:</p>
+          <ul>
+            <li>Machine wash cold with similar colors</li>
+            <li>Use mild detergent (avoid fabric softeners)</li>
+            <li>Hang dry or tumble dry low</li>
+            <li>Do not iron directly on prints or logos</li>
+            <li>Turn garments inside out before washing</li>
+          </ul>
+          <p>Proper care will extend the life of your performance apparel.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Are your products sweat-wicking?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! All IronFit apparel features advanced moisture-wicking technology that pulls sweat away from your skin to keep you dry and comfortable during intense workouts. Our fabrics are:</p>
+          <ul>
+            <li>Quick-drying</li>
+            <li>Breathable</li>
+            <li>Odor-resistant</li>
+            <li>Stretch-recovery for full range of motion</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="faq-category" id="account-payments">Account & Payments</h3>
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>How do I create an account?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Creating an account is easy! Click the "Create Account" icon in the top navigation or <a href="#" id="faqCreateAccount" class="text-red-400 hover:text-red-300">click here</a> to get started. You'll need to provide:</p>
+          <ul>
+            <li>Your name</li>
+            <li>Email address</li>
+            <li>Password</li>
+          </ul>
+          <p>With an account, you can track orders, save your shipping information, and access exclusive member benefits.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>What payment methods do you accept?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We accept all major payment methods:</p>
+          <ul>
+            <li>Visa, Mastercard, American Express, Discover</li>
+            <li>PayPal</li>
+            <li>Apple Pay</li>
+            <li>Google Pay</li>
+            <li>Cryptocurrency (Bitcoin, Ethereum)</li>
+          </ul>
+          <p>All payments are processed securely through our encrypted checkout system.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <h3>Is my payment information secure?</h3>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Absolutely. We take security seriously and use industry-standard encryption to protect your payment information. Our checkout process is:</p>
+          <ul>
+            <li>PCI-DSS compliant</li>
+            <li>SSL encrypted</li>
+            <li>Tokenized for additional security</li>
+          </ul>
+          <p>We never store your full credit card information on our servers.</p>
+        </div>
+      </div>
+
+      <div class="contact-cta">
+        <h3 class="text-xl font-semibold mb-4">Still have questions?</h3>
+        <p class="mb-6">Our customer service team is happy to help!</p>
+        <a href="contact.html" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-full transition duration-300">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8 text-left">
+        <div>
+          <h4 class="text-white font-semibold mb-4">Shop</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-red-400">New Arrivals</a></li>
+            <li><a href="#" class="hover:text-red-400">Men's Apparel</a></li>
+            <li><a href="#" class="hover:text-red-400">Women's Apparel</a></li>
+            <li><a href="#" class="hover:text-red-400">Accessories</a></li>
+            <li><a href="#" class="hover:text-red-400">Collections</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="#faq" class="hover:text-red-400">FAQs</a></li>
+            <li><a href="#" class="hover:text-red-400">Shipping Info</a></li>
+            <li><a href="#" class="hover:text-red-400">Returns & Exchanges</a></li>
+            <li><a href="#" class="hover:text-red-400">Size Guide</a></li>
+            <li><a href="contact.html" class="hover:text-red-400">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="about us.html" class="hover:text-red-400">About Us</a></li>
+            <li><a href="#" class="hover:text-red-400">Our Story</a></li>
+            <li><a href="#" class="hover:text-red-400">Athletes</a></li>
+            <li><a href="#" class="hover:text-red-400">Careers</a></li>
+            <li><a href="#" class="hover:text-red-400">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Connect</h4>
+          <div class="flex space-x-4 mb-4">
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-facebook text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-twitter text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-youtube text-xl"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400"><i class="fab fa-tiktok text-xl"></i></a>
+          </div>
+          <p class="text-sm">Subscribe to our newsletter for exclusive offers and updates</p>
+          <div class="mt-3 flex">
+            <input type="email" placeholder="Your email" class="bg-gray-700 text-white px-4 py-2 rounded-l focus:outline-none w-full">
+            <button class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-r"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-6">
+        <p>&copy; 2025 IronFit Apparel. All rights reserved.</p>
+        <div class="mt-2 space-x-4">
+          <a href="#" class="hover:text-red-400">Privacy Policy</a>
+          <a href="#" class="hover:text-red-400">Terms of Service</a>
+          <a href="#" class="hover:text-red-400">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-container bg-gray-800 rounded-lg shadow-xl w-full max-w-md mx-4 overflow-hidden">
+      <!-- Modal Header with Tabs -->
+      <div class="flex border-b border-gray-700">
+        <div class="auth-tab active w-1/2 py-4 text-center font-semibold" data-tab="login">Sign In</div>
+        <div class="auth-tab w-1/2 py-4 text-center font-semibold" data-tab="register">Create Account</div>
+      </div>
+      
+      <!-- Login Form -->
+      <div class="auth-content p-8" id="loginContent">
+        <h3 class="text-2xl font-bold mb-6 text-center">Welcome Back</h3>
+        
+        <form id="loginForm">
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="loginEmail" class="form-input py-3 px-4 rounded-lg" placeholder="Email" required>
+            <div class="error-message" id="loginEmailError">Please enter a valid email</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="loginPassword" class="form-input py-3 px-4 rounded-lg" placeholder="Password" required>
+            <span class="password-toggle" id="loginTogglePassword"><i class="fas fa-eye"></i></span>
+            <div class="error-message" id="loginPasswordError">Password must be at least 6 characters</div>
+          </div>
+          
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center">
+              <input type="checkbox" id="rememberMe" class="rounded text-red-500 focus:ring-red-500">
+              <label for="rememberMe" class="ml-2 text-sm text-gray-400">Remember me</label>
+            </div>
+            <a href="#" class="text-sm text-red-400 hover:text-red-300">Forgot password?</a>
+          </div>
+          
+          <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 mb-4">
+            Sign In
+          </button>
+          
+          <div class="success-message" id="loginSuccess">Login successful! Redirecting...</div>
+          <div class="error-message" id="loginError">Invalid email or password</div>
+        </form>
+        
+        <div class="divider">or continue with</div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+        
+        <p class="text-center mt-6 text-gray-400">
+          Don't have an account? <a href="#" class="text-red-400 hover:text-red-300 switch-to-register">Sign up</a>
+        </p>
+      </div>
+      
+      <!-- Register Form -->
+      <div class="auth-content p-8 hidden" id="registerContent">
+        <h3 class="text-2xl font-bold mb-6 text-center">Create Account</h3>
+        
+        <form id="registerForm">
+          <div class="form-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="registerName" class="form-input py-3 px-4 rounded-lg" placeholder="Full Name" required>
+            <div class="error-message" id="registerNameError">Please enter your name</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="registerEmail" class="form-input py-3 px-4 rounded-lg" placeholder="Email" required>
+            <div class="error-message" id="registerEmailError">Please enter a valid email</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="registerPassword" class="form-input py-3 px-4 rounded-lg" placeholder="Password" required>
+            <span class="password-toggle" id="registerTogglePassword"><i class="fas fa-eye"></i></span>
+            <div class="error-message" id="registerPasswordError">Password must be at least 6 characters</div>
+          </div>
+          
+          <div class="form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="registerConfirmPassword" class="form-input py-3 px-4 rounded-lg" placeholder="Confirm Password" required>
+            <div class="error-message" id="registerConfirmPasswordError">Passwords don't match</div>
+          </div>
+          
+          <div class="flex items-center mb-6">
+            <input type="checkbox" id="acceptTerms" class="rounded text-red-500 focus:ring-red-500" required>
+            <label for="acceptTerms" class="ml-2 text-sm text-gray-400">
+              I agree to the <a href="#" class="text-red-400 hover:text-red-300">Terms of Service</a> and <a href="#" class="text-red-400 hover:text-red-300">Privacy Policy</a>
+            </label>
+          </div>
+          
+          <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 mb-4">
+            Create Account
+          </button>
+          
+          <div class="success-message" id="registerSuccess">Account created successfully! Redirecting...</div>
+          <div class="error-message" id="registerError">Error creating account. Please try again.</div>
+        </form>
+        
+        <div class="divider">or sign up with</div>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <button class="social-btn google-btn">
+            <i class="fab fa-google"></i> Google
+          </button>
+          <button class="social-btn facebook-btn">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </button>
+        </div>
+        
+        <p class="text-center mt-6 text-gray-400">
+          Already have an account? <a href="#" class="text-red-400 hover:text-red-300 switch-to-login">Sign in</a>
+        </p>
+      </div>
+      
+      <!-- Close Button -->
+      <button class="absolute top-4 right-4 text-gray-400 hover:text-white" id="closeAuthModal">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const authModal = document.getElementById('authModal');
+    const loginContent = document.getElementById('loginContent');
+    const registerContent = document.getElementById('registerContent');
+    const loginTab = document.querySelector('[data-tab="login"]');
+    const registerTab = document.querySelector('[data-tab="register"]');
+    const switchToRegisterLinks = document.querySelectorAll('.switch-to-register');
+    const switchToLoginLinks = document.querySelectorAll('.switch-to-login');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const createAccountBtn = document.getElementById('createAccountBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const loginTogglePassword = document.getElementById('loginTogglePassword');
+    const registerTogglePassword = document.getElementById('registerTogglePassword');
+    const loginPassword = document.getElementById('loginPassword');
+    const registerPassword = document.getElementById('registerPassword');
+    const faqCreateAccount = document.getElementById('faqCreateAccount');
+
+    // FAQ Elements
+    const faqItems = document.querySelectorAll('.faq-item');
+    const faqSearch = document.getElementById('faqSearch');
+    const noResults = document.getElementById('noResults');
+
+    // Toggle password visibility
+    loginTogglePassword.addEventListener('click', function() {
+      togglePasswordVisibility(loginPassword, loginTogglePassword);
+    });
+    
+    registerTogglePassword.addEventListener('click', function() {
+      togglePasswordVisibility(registerPassword, registerTogglePassword);
+    });
+
+    function togglePasswordVisibility(passwordField, toggleIcon) {
+      const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+      toggleIcon.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    }
+    
+    // Switch between login and register tabs
+    loginTab.addEventListener('click', function() {
+      switchTab('login');
+    });
+    
+    registerTab.addEventListener('click', function() {
+      switchTab('register');
+    });
+
+    switchToRegisterLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchTab('register');
+      });
+    });
+
+    switchToLoginLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchTab('login');
+      });
+    });
+
+    function switchTab(tab) {
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginContent.classList.remove('hidden');
+        registerContent.classList.add('hidden');
+      } else {
+        loginTab.classList.remove('active');
+        registerTab.classList.add('active');
+        loginContent.classList.add('hidden');
+        registerContent.classList.remove('hidden');
+      }
+    }
+    
+    // Close modal
+    closeAuthModal.addEventListener('click', function() {
+      authModal.classList.remove('active');
+    });
+    
+    // Click outside modal to close
+    authModal.addEventListener('click', function(e) {
+      if (e.target === authModal) {
+        authModal.classList.remove('active');
+      }
+    });
+    
+    // Create Account button click
+    createAccountBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      authModal.classList.add('active');
+      switchTab('register');
+    });
+    
+    // FAQ Create Account link
+    faqCreateAccount.addEventListener('click', function(e) {
+      e.preventDefault();
+      authModal.classList.add('active');
+      switchTab('register');
+    });
+    
+    // Login form submission
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Simple validation
+      let isValid = true;
+      
+      if (!validateEmail(email)) {
+        document.getElementById('loginEmailError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('loginEmailError').style.display = 'none';
+      }
+      
+      if (password.length < 6) {
+        document.getElementById('loginPasswordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('loginPasswordError').style.display = 'none';
+      }
+      
+      if (isValid) {
+        // In a real app, you'd make an API call here to authenticate
+        // For demo purposes, we'll just simulate a successful login
+        
+        // Hide any previous error
+        document.getElementById('loginError').style.display = 'none';
+        
+        // Show success message
+        document.getElementById('loginSuccess').style.display = 'block';
+        
+        // Store login state
+        localStorage.setItem('ironfitLoggedIn', 'true');
+        localStorage.setItem('ironfitUserEmail', email);
+        
+        // Close modal after delay
+        setTimeout(() => {
+          authModal.classList.remove('active');
+          document.getElementById('loginSuccess').style.display = 'none';
+        }, 1500);
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    });
+    
+    // Register form submission
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirmPassword = document.getElementById('registerConfirmPassword').value;
+      const acceptTerms = document.getElementById('acceptTerms').checked;
+      
+      // Validation
+      let isValid = true;
+      
+      if (name.trim() === '') {
+        document.getElementById('registerNameError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerNameError').style.display = 'none';
+      }
+      
+      if (!validateEmail(email)) {
+        document.getElementById('registerEmailError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerEmailError').style.display = 'none';
+      }
+      
+      if (password.length < 6) {
+        document.getElementById('registerPasswordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerPasswordError').style.display = 'none';
+      }
+      
+      if (password !== confirmPassword) {
+        document.getElementById('registerConfirmPasswordError').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('registerConfirmPasswordError').style.display = 'none';
+      }
+      
+      if (!acceptTerms) {
+        alert('Please accept the terms and conditions');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // In a real app, you'd make an API call here to register the user
+        // For demo purposes, we'll just simulate a successful registration
+        
+        // Hide any previous error
+        document.getElementById('registerError').style.display = 'none';
+        
+        // Show success message
+        document.getElementById('registerSuccess').style.display = 'block';
+        
+        // Store login state
+        localStorage.setItem('ironfitLoggedIn', 'true');
+        localStorage.setItem('ironfitUserEmail', email);
+        localStorage.setItem('ironfitUserName', name);
+        
+        // Close modal after delay
+        setTimeout(() => {
+          authModal.classList.remove('active');
+          document.getElementById('registerSuccess').style.display = 'none';
+        }, 1500);
+      } else {
+        document.getElementById('registerError').style.display = 'block';
+      }
+    });
+    
+    // Helper function to validate email
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+    
+    // Check if user is already logged in when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const isLoggedIn = localStorage.getItem('ironfitLoggedIn') === 'true';
+      
+      // Initialize FAQ functionality
+      initFAQ();
+    });
+    
+    // FAQ Functionality
+    function initFAQ() {
+      // Toggle FAQ items
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
+      });
+      
+      // FAQ Search
+      faqSearch.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        let hasResults = false;
+        
+        faqItems.forEach(item => {
+          const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+          const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+          
+          if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = '';
+            hasResults = true;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        // Show/hide no results message
+        noResults.style.display = hasResults || searchTerm === '' ? 'none' : 'block';
+      });
+      
+      // Smooth scroll for category links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 100,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
