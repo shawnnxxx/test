@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | IronFit Apparel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'iron-dark': '#111827',
+            'iron-light': '#1f2937',
+            'iron-red': '#ef4444',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .contact-card {
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+      border-left-color: #ef4444;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+    .form-input:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold tracking-wide text-red-500">IronFit Apparel</h1>
+    <nav class="space-x-6 hidden md:flex">
+      <a href="index_1.html" class="hover:text-red-400 transition">Home</a>
+      <a href="shop.html" class="hover:text-red-400 transition">Shop</a>
+      <a href="about us.html" class="hover:text-red-400 transition">About Us</a>
+      <a href="contact.html" class="text-red-400 font-semibold">Contact</a>
+    </nav>
+    <button class="md:hidden text-white focus:outline-none">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  </header>
+
+  <!-- Contact Section -->
+  <main class="flex-grow">
+    <section class="py-16 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-red-500 mb-4">Get In Touch</h2>
+          <p class="text-gray-300 max-w-2xl mx-auto">
+            Have questions, feedback, or want to collaborate? Our team is here to help you with anything related to IronFit Apparel.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10 mb-16">
+          <!-- Contact Information Cards -->
+          <div class="space-y-6">
+            <div class="contact-card bg-gray-800 p-6 rounded-lg">
+              <div class="flex items-center mb-4">
+                <div class="bg-red-500 p-3 rounded-full mr-4">
+                  <i class="fas fa-map-marker-alt text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold">Our Location</h3>
+              </div>
+              <p class="text-gray-400 pl-16">123 Fitness Street, Gym City, 90210</p>
+            </div>
+
+            <div class="contact-card bg-gray-800 p-6 rounded-lg">
+              <div class="flex items-center mb-4">
+                <div class="bg-red-500 p-3 rounded-full mr-4">
+                  <i class="fas fa-phone-alt text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold">Phone Number</h3>
+              </div>
+              <p class="text-gray-400 pl-16">+1 (555) IRON-FIT</p>
+            </div>
+
+            <div class="contact-card bg-gray-800 p-6 rounded-lg">
+              <div class="flex items-center mb-4">
+                <div class="bg-red-500 p-3 rounded-full mr-4">
+                  <i class="fas fa-envelope text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold">Email Address</h3>
+              </div>
+              <p class="text-gray-400 pl-16">support@ironfitapparel.com</p>
+            </div>
+
+            <div class="contact-card bg-gray-800 p-6 rounded-lg">
+              <div class="flex items-center mb-4">
+                <div class="bg-red-500 p-3 rounded-full mr-4">
+                  <i class="fas fa-clock text-white"></i>
+                </div>
+                <h3 class="text-xl font-semibold">Working Hours</h3>
+              </div>
+              <p class="text-gray-400 pl-16">Monday - Friday: 9AM - 6PM</p>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="bg-gray-800 rounded-lg p-8 shadow-lg h-full">
+            <h3 class="text-2xl font-bold text-red-500 mb-6">Send Us a Message</h3>
+            <form id="contactForm" class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name</label>
+                <input type="text" id="name" name="name" required 
+                       class="form-input w-full px-4 py-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500">
+                <p id="nameError" class="text-red-400 text-xs mt-1 hidden">Please enter your name</p>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                <input type="email" id="email" name="email" required 
+                       class="form-input w-full px-4 py-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500">
+                <p id="emailError" class="text-red-400 text-xs mt-1 hidden">Please enter a valid email</p>
+              </div>
+              <div>
+                <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                <select id="subject" name="subject" 
+                        class="form-input w-full px-4 py-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500">
+                  <option value="">Select a subject</option>
+                  <option value="order">Order Inquiry</option>
+                  <option value="product">Product Question</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="collaboration">Collaboration</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Your Message</label>
+                <textarea id="message" name="message" rows="5" required 
+                          class="form-input w-full px-4 py-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                <p id="messageError" class="text-red-400 text-xs mt-1 hidden">Please enter your message</p>
+              </div>
+              <button type="submit" 
+                      class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded transition duration-300 w-full flex items-center justify-center">
+                <i class="fas fa-paper-plane mr-2"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Social Media & Map -->
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="bg-gray-800 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="bg-gray-700 hover:bg-red-500 w-12 h-12 rounded-full flex items-center justify-center transition">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="bg-gray-700 hover:bg-red-500 w-12 h-12 rounded-full flex items-center justify-center transition">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="bg-gray-700 hover:bg-red-500 w-12 h-12 rounded-full flex items-center justify-center transition">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="bg-gray-700 hover:bg-red-500 w-12 h-12 rounded-full flex items-center justify-center transition">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+          <div class="bg-gray-800 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold mb-4">Find Us</h3>
+            <div class="aspect-w-16 aspect-h-9 bg-gray-700 rounded overflow-hidden">
+              <!-- Placeholder for map -->
+              <div class="w-full h-64 flex items-center justify-center text-gray-500">
+                <i class="fas fa-map-marked-alt text-4xl"></i>
+                <p class="ml-3">Map Location</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-8">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="text-lg font-semibold text-red-500 mb-4">IronFit Apparel</h4>
+          <p class="text-gray-400">Premium fitness apparel designed for performance and style.</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="index_1.html" class="text-gray-400 hover:text-red-400 transition">Home</a></li>
+            <li><a href="shop.html" class="text-gray-400 hover:text-red-400 transition">Shop</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-red-400 transition">About Us</a></li>
+            <li><a href="contact.html" class="text-gray-400 hover:text-red-400 transition">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">FAQs</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">Shipping Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">Returns & Exchanges</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">Size Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+          <p class="text-gray-400 mb-2">Subscribe for exclusive offers and fitness tips.</p>
+          <div class="flex">
+            <input type="email" placeholder="Your email" class="px-4 py-2 bg-gray-700 text-white rounded-l focus:outline-none w-full">
+            <button class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-r transition">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-6 text-center text-gray-500 text-sm">
+        &copy; 2025 IronFit Apparel. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Reset errors
+      document.querySelectorAll('[id$="Error"]').forEach(el => {
+        el.classList.add('hidden');
+      });
+      
+      let isValid = true;
+      
+      // Validate name
+      const name = document.getElementById('name');
+      if (!name.value.trim()) {
+        document.getElementById('nameError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      // Validate email
+      const email = document.getElementById('email');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.value)) {
+        document.getElementById('emailError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      // Validate message
+      const message = document.getElementById('message');
+      if (!message.value.trim()) {
+        document.getElementById('messageError').classList.remove('hidden');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        // Here you would typically send the form data to a server
+        alert('Thank you for your message! We will get back to you soon.');
+        this.reset();
+      }
+    });
+  </script>
+</body>
+</html>

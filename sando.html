@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IronFit Apparel - Longsleeves</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .category-card:hover .category-overlay {
+      opacity: 1;
+    }
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold tracking-wide text-red-500">IronFit Apparel</h1>
+    <nav class="space-x-6 hidden md:flex">
+      <a href="index_1.html" class="hover:text-red-400 transition">Home</a>
+      <a href="shop.html" class="hover:text-red-400 transition font-semibold text-red-400">Shop</a>
+      <a href="about us.html" class="hover:text-red-400 transition">About us</a>
+      <a href="contact.html" class="hover:text-red-400 transition">Contact</a>
+    </nav>
+    <div class="flex items-center space-x-4">
+    
+      <a href="index_1.html" class="hover:text-red-400"><i class="fas fa-user"></i></a>
+      
+      <button class="md:hidden text-white focus:outline-none">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden bg-gray-700 hidden" id="mobileMenu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="index_1.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600">Home</a>
+      <a href="shop.html" class="block px-3 py-2 rounded-md text-base font-medium bg-gray-600 text-red-400">Shop</a>
+      <a href="about us.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600">About us</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-600">Contact</a>
+    </div>
+  </div>
+
+  <!-- Shop Hero -->
+  <section class="relative bg-gray-800">
+    <div class="container mx-auto px-4 py-12">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Sando</h1>
+      <p class="text-gray-400 max-w-2xl">Performance apparel designed to push your limits and look great doing it.</p>
+    </div>
+  </section>
+
+  <!-- Category Navigation -->
+  <section class="sticky top-16 z-40 bg-gray-800 shadow-sm">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex overflow-x-auto space-x-6 pb-2">
+
+        <a href="shop.html" class="whitespace-nowrap hover:text-red-400 transition">Shop</a>
+         <a href="t shirt.html" class="whitespace-nowrap hover:text-red-400 transition">T-shirt</a>
+      <a href="longsleeve.html" class="whitespace-nowrap hover:text-red-400 transition">Longsleeve</a>
+       
+     
+    
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <section class="bg-gray-700 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="text-sm text-gray-400">
+        Showing <span class="font-medium text-white">8</span> products
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="dropdown relative">
+          <button class="flex items-center space-x-1 text-sm hover:text-red-400 focus:outline-none">
+            <span>Sort by: Featured</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+          </button>
+          <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg hidden z-50">
+            <div class="py-1">
+              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Featured</a>
+              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Newest</a>
+              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Price: Low to High</a>
+              <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-700">Price: High to Low</a>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown relative">
+          <button class="flex items-center space-x-1 text-sm hover:text-red-400 focus:outline-none">
+            <span>Filter</span>
+            <i class="fas fa-sliders-h text-xs"></i>
+          </button>
+          <div class="dropdown-menu absolute right-0 mt-2 w-64 bg-gray-800 rounded-md shadow-lg hidden z-50 p-4">
+            <div class="mb-4">
+              <h4 class="font-medium mb-2">Size</h4>
+              <div class="grid grid-cols-4 gap-2">
+                <button class="border border-gray-600 rounded py-1 text-sm hover:border-red-400">XS</button>
+                <button class="border border-gray-600 rounded py-1 text-sm hover:border-red-400">S</button>
+                <button class="border border-gray-600 rounded py-1 text-sm hover:border-red-400">M</button>
+                <button class="border border-gray-600 rounded py-1 text-sm hover:border-red-400">L</button>
+                <button class="border border-gray-600 rounded py-1 text-sm hover:border-red-400">XL</button>
+                <button class="border border-gray-600 rounded py-1 text-sm hover:border-red-400">XXL</button>
+              </div>
+            </div>
+            <div class="mb-4">
+              <h4 class="font-medium mb-2">Color</h4>
+              <div class="flex space-x-2">
+                <button class="w-6 h-6 rounded-full bg-black border border-gray-600 hover:border-red-400"></button>
+                <button class="w-6 h-6 rounded-full bg-gray-400 border border-gray-600 hover:border-red-400"></button>
+                <button class="w-6 h-6 rounded-full bg-white border border-gray-600 hover:border-red-400"></button>
+                <button class="w-6 h-6 rounded-full bg-red-600 border border-gray-600 hover:border-red-400"></button>
+                <button class="w-6 h-6 rounded-full bg-blue-600 border border-gray-600 hover:border-red-400"></button>
+              </div>
+            </div>
+            <div class="flex justify-between">
+              <button class="text-sm text-gray-400 hover:text-red-400">Clear all</button>
+              <button class="text-sm bg-red-500 hover:bg-red-600 px-4 py-1 rounded">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="py-12 bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <!-- Product 1 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/CNY_7237PDP_1920x.jpg?v=1731920328" class="w-full h-80 object-cover">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+             
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+               
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit</h3>
+         
+            <p class="font-medium mt-2">69 pesos </p>
+           
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/A_PowerOriginalsCutOffTankCharcoalCoreMarlA2C9M-GBBB_1027_1920x.jpg?v=1745401454">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+             
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+               
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit </h3>
+          
+            <p class="font-medium mt-2">150 pesos</p>
+            
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/PrimeDropArmTankGSBlack-GSVividRedA2C5W-RBWN-0660-0065_d63ee684-08ad-4b21-9a34-df97b7203d59_1920x.jpg?v=1740429538">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+              
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+                
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit</h3>
+         
+            <p class="font-medium mt-2">69 pesos</p>
+            
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/RibbedTank3PackA5A2E-WCC7.482_7948205d-3573-437a-b2fe-9c7031a37a40_1920x.jpg?v=1732706490">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+              
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+               
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit</h3>
+            
+            <p class="font-medium mt-2">69 pesos</p>
+            
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/GFXLifting7RDETankGSBlackA2B9H-BB2J1703-0132_1920x.jpg?v=1741794090">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+             
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+                
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit </h3>
+            
+            <p class="font-medium mt-2">150 pesos</p>
+           
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/images-GFXConditioning5OSSyntheticCutOffGSBlackA2B9C_BB2J_0038_1920x.jpg?v=1746465316" alt="IronFit Stringer" class="w-full h-80 object-cover">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+             
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+  
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit </h3>
+       
+            <p class="font-medium mt-2"> 150 pesos</p>
+            
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/images-GFXLifting9TankGSBlackA2B9I_BB2J_5083_A_1920x.jpg?v=1746463922">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+             
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+               
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit</h3>
+       
+            <p class="font-medium mt-2">69 pesos</p>
+           
+          </div>
+        </div>
+
+        <!-- Product 8 -->
+        <div class="product-card relative bg-gray-800 rounded-lg overflow-hidden">
+          <div class="relative overflow-hidden">
+            <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/Power_Ecomm_PDP_USP_Core_Tank_Black_US_1920x.jpg?v=1745401450"IronFit Gym Bag" class="w-full h-80 object-cover">
+            <div class="product-overlay absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 transition-opacity duration-300">
+              
+            </div>
+            <div class="absolute top-2 right-2">
+              <button class="bg-gray-900 bg-opacity-70 rounded-full p-2 hover:text-red-400">
+                
+              </button>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-medium">IronFit </h3>
+            <p class="text-gray-400"></p>
+            <p class="font-medium mt-2">69 pesos </p>
+           
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="py-12 bg-gray-800">
+    <div class="container mx-auto px-4 text-center max-w-2xl">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Join the IronFit Community</h2>
+      <p class="text-gray-400 mb-6">Sign up for exclusive offers, training tips, and new product launches.</p>
+      <div class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500">
+        <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-6 rounded transition">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Shop</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Men</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Women</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Accessories</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400">New Arrivals</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Help</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Customer Service</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Track Order</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Returns & Exchanges</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Shipping Info</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">About</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-red-400">Our Story</a></li>
+            <li><a href="#" class="text-gray-400 hover
+</html>

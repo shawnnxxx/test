@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | IronFit Apparel</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+    .team-member:hover img {
+      transform: scale(1.05);
+    }
+    .team-member img {
+      transition: transform 0.3s ease;
+    }
+    .mission-card {
+      transition: all 0.3s ease;
+    }
+    .mission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold tracking-wide text-red-500">IronFit Apparel</h1>
+    <nav class="space-x-6 flex items-center">
+      <a href="index_1.html" class="hover:text-red-400 transition">Home</a>
+      <a href="shop.html" class="hover:text-red-400 transition">Shop</a>
+      <a href="about.html" class="text-red-400 font-semibold">About Us</a>
+      <a href="services.html" class="hover:text-red-400 transition">Services</a>
+      <a href="contact.html" class="hover:text-red-400 transition">Contact</a>
+ 
+      
+      <!-- User Icon -->
+      <div class="create-account-icon">
+        <a href="creator.html" id="createAccountBtn" class="hover:text-red-400 transition" title="Account">
+          <i class="fas fa-user-circle text-2xl"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-32 px-6 bg-cover bg-center" style="background-image: url('https://imgs.search.brave.com/t5tK8f89VqRSdzTO10dP4cP8v0wt4-x7wY3yErLEsfc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vbENjbTZB/NUtwbkJxdXM1RU5C/VDNkeFZYa3pkUFh6/R0FpUUV0Y1d6ajNL/Yy9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlw/YldjdS9abkpsWlhC/cGF5NWpiMjB2L2NI/SmxiV2wxYlMxd2FH/OTAvYnk5aWJHRmph/eTFuZVcwdC9ZbUZq/YTJkeWIzVnVaQzFr/L1lYSnJMV3hwWjJo/MGN5MTMvYVhSb0xX/TnZjSGt0YzNCaC9Z/MlV0YzNCdmNuUXRZ/Mjl1L1kyVndkQzFv/WldGc2RHaDUvTFdG/amRHbDJaUzFzYVda/bC9jM1I1YkdWZk5q/azVOakV0L01UQTFO/QzVxY0djX2MyVnQv/ZEQxaGFYTmZhSGxp/Y21say9KbmM5TnpR/dw');">
+    <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white">About IronFit</h1>
+      <p class="text-xl md:text-2xl text-gray-300">Built by athletes, for athletes. Our story of strength and dedication.</p>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="py-20 px-6 bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-red-500 mb-4">Our Story</h2>
+        <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+        <p class="text-gray-300 max-w-3xl mx-auto">
+          IronFit Apparel was born in 2018 from a simple idea: create gym wear that actually works as hard as you do.
+          Founded by competitive powerlifter Jake Reynolds, what started as a small garage operation has grown into
+          a movement embraced by athletes worldwide.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-2xl font-bold mb-4">From Garage to Global</h3>
+          <p class="text-gray-400 mb-6">
+            Our journey began with a single sewing machine and a relentless drive to solve the problems we faced as athletes.
+            Tired of shirts that ripped during deadlifts and shorts that couldn't handle squat sessions, we set out to engineer
+            apparel that could withstand the most intense training.
+          </p>
+          <p class="text-gray-400">
+            Today, every IronFit product is still tested by our team of competitive athletes before it reaches you.
+            We've grown, but our commitment to quality and performance remains unchanged.
+          </p>
+        </div>
+        <div class="rounded-lg overflow-hidden shadow-xl">
+          <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1075&q=80" 
+               alt="Our humble beginnings" 
+               class="w-full h-auto object-cover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-20 px-6 bg-gray-800">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-16">Our Mission</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="mission-card bg-gray-700 p-8 rounded-lg">
+          <div class="text-red-500 text-4xl mb-4">
+            <i class="fas fa-dumbbell"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Performance First</h3>
+          <p class="text-gray-400">
+            Every stitch, seam, and fabric choice is optimized for athletic performance and durability.
+          </p>
+        </div>
+        
+        <div class="mission-card bg-gray-700 p-8 rounded-lg">
+          <div class="text-red-500 text-4xl mb-4">
+            <i class="fas fa-tshirt"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">No Compromise</h3>
+          <p class="text-gray-400">
+            We refuse to sacrifice quality for profit. If it's not good enough for our own training, it's not good enough for you.
+          </p>
+        </div>
+        
+        <div class="mission-card bg-gray-700 p-8 rounded-lg">
+          <div class="text-red-500 text-4xl mb-4">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Community Driven</h3>
+          <p class="text-gray-400">
+            We're building more than a brand - we're building a community of athletes pushing their limits.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-20 px-6 bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-red-500 mb-4">Meet The Team</h2>
+        <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+        <p class="text-gray-300 max-w-3xl mx-auto">
+          Behind every IronFit product is a team of passionate athletes and designers committed to your performance.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="team-member text-center">
+          <div class="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6 border-4 border-red-500">
+            <img src="https://imgs.search.brave.com/6s3W-q1IyN-PEb62lk5iCboDLeLNT265922sj3pL-kY/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vMjNqeHdD/azBZQWh5OUlfY0Ix/ekg2ajZYTjQ2cWR0/T1lZR0pCMlRIam5Z/US9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTkz/WVd4cy9jR0Z3WlhK/allYWmxMbU52L2JT/OTNjQzkzY0RFek1q/QTUvT0Rnd0xtcHda/dw.jpeg" 
+                 alt="Jake Reynolds" 
+                 class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-bold">toji</h3>
+          <p class="text-red-500 mb-2">Founder & CEO</p>
+          <p class="text-gray-400">
+            Competitive powerlifter with 10+ years experience. Designs every prototype himself.
+          </p>
+        </div>
+        
+        <div class="team-member text-center">
+          <div class="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6 border-4 border-red-500">
+            <img src="https://imgs.search.brave.com/rOcvgKOCOZFV_tHiS0x9C64kz3RBzFxVg4U_nCf0fLk/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vNnJuZlh6/QnRsYXVzbFljRzVJ/dlB4NXV1Q3lYSDda/cjY1azZwcDJDX3BG/QS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTkz/WVd4cy9jR0Z3WlhK/aVlYUXVZMjl0L0wy/bHRaeTh4TkRNeU9E/QTAvTFdOb2NtbHpM/V0oxYlhOMC9aV0Zr/TFhkaGJHeHdZWEJs/L2NpMWllUzE2ZVhw/NllXVnovZEdobGRH/bGpjeTFrYjNkdS9i/RzloWkMxdmJpMTZa/V1JuL1pTNTNaV0p3.jpeg" 
+                 alt="Sarah Chen" 
+                 class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-bold">Cbum</h3>
+          <p class="text-red-500 mb-2">Head of Design</p>
+          <p class="text-gray-400">
+           7x Olympic champion
+          </p>
+        </div>
+        
+        <div class="team-member text-center">
+          <div class="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6 border-4 border-red-500">
+            <img src="https://imgs.search.brave.com/F9Q7_s2BsRNQr98AVL9psOOobD_r_dLU_twAq9iYrDQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vNnZ1dnZt/dUdhaThWcHJMY21s/bmtLczNWdGIwekE2/NUwzYUR2TUJaWnI5/US9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlw/TG5CcC9ibWx0Wnk1/amIyMHZiM0pwL1oy/bHVZV3h6TDJSakwy/WmwvTDJJMkwyUmpa/bVZpTm1JMi9NbVps/TlRsa01ERmlNR1l4/L09UTmpZekkxTkdZ/M01HRTEvTG1wd1p3" 
+                 alt="Marcus Johnson" 
+                 class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-bold">David</h3>
+          <p class="text-red-500 mb-2">Athlete Relations</p>
+          <p class="text-gray-400">
+            Professional bodybuilder who tests every product in real competition.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="py-20 px-6 bg-gray-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose IronFit?</h2>
+        <div class="w-24 h-1 bg-red-500 mx-auto mb-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <div class="flex items-start mb-8">
+            <div class="text-red-500 text-2xl mr-4">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Athlete-Tested Quality</h3>
+              <p class="text-gray-400">
+                Every product undergoes rigorous testing by our team of competitive athletes before we release it.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex items-start mb-8">
+            <div class="text-red-500 text-2xl mr-4">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Innovative Fabrics</h3>
+              <p class="text-gray-400">
+                Our proprietary FlexCore™ fabric technology provides unmatched durability and flexibility.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="text-red-500 text-2xl mr-4">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Community Focused</h3>
+              <p class="text-gray-400">
+                We reinvest 5% of all profits into youth fitness programs and local gyms.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <div class="bg-gray-700 rounded-lg overflow-hidden shadow-xl">
+            <img src="https://imgs.search.brave.com/uHACx-FFJn6iitwIuyF-SJHfsgBAWthSStqVZWxgC38/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vUGxPbU9R/ckxTVkUzRC1oaGZ2/S3NYbDVJUVNHaDl1/RVc3S0xXSHJOX3R3/QS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlw/TG5CcC9ibWx0Wnk1/amIyMHZiM0pwL1oy/bHVZV3h6THpRMEx6/STAvTHpBekx6UTBN/alF3TXpkaS9NRGxq/TkRKaU1HTmhZalZt/L1pURm1OVFZrWVRJ/NFlqWm0vTG1wd1p3" 
+                 alt="IronFit in action" 
+                 class="w-full h-auto object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 px-6 bg-red-600">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Experience IronFit?</h2>
+      <p class="text-xl text-red-100 mb-8">
+        Join thousands of athletes who trust IronFit for their most intense training sessions.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="shop.html" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
+          Shop Now
+        </a>
+        <a href="contact.html" class="bg-white hover:bg-gray-100 text-red-600 font-semibold py-3 px-8 rounded-full transition duration-300">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="text-white font-semibold text-lg mb-4">IronFit Apparel</h4>
+          <p class="text-gray-400">
+            Performance apparel designed for lifters, by lifters. Built for strength, worn with pride.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-semibold text-lg mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="index_1.html" class="text-gray-400 hover:text-red-400 transition">Home</a></li>
+            <li><a href="shop.html" class="text-gray-400 hover:text-red-400 transition">Shop</a></li>
+            <li><a href="about.html" class="text-gray-400 hover:text-red-400 transition">About Us</a></li>
+            <li><a href="contact.html" class="text-gray-400 hover:text-red-400 transition">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-semibold text-lg mb-4">Support</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">FAQs</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">Shipping Info</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">Returns & Exchanges</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-red-400 transition">Size Guide</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-semibold text-lg mb-4">Connect With Us</h4>
+          <div class="flex space-x-4 mb-4">
+            <a href="#" class="text-gray-400 hover:text-red-400 text-xl"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400 text-xl"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400 text-xl"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-red-400 text-xl"><i class="fab fa-youtube"></i></a>
+          </div>
+          <p class="text-gray-400">Subscribe for exclusive offers</p>
+          <div class="mt-2 flex">
+            <input type="email" placeholder="Your email" class="bg-gray-700 text-white px-4 py-2 rounded-l focus:outline-none w-full">
+            <button class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-r text-white">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+        <p>&copy; 2025 IronFit Apparel. All rights reserved.</p>
+        <div class="mt-2 flex justify-center space-x-4">
+          <a href="#" class="hover:text-red-400">Privacy Policy</a>
+          <a href="#" class="hover:text-red-400">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  
+    ;
+  </script>
+</body>
+</html>
